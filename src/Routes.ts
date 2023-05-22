@@ -1,6 +1,8 @@
 import { Router } from "express";
 import { createStudentController } from "./Student/CreateStudent/Index";
 import { getStudentsController } from "./Student/GetStudents/Index";
+import { getFilteredStudentsController } from "./Student/GetFilteredStudents/Index";
+
 export const routes = Router()
 
 routes
@@ -10,4 +12,7 @@ routes
     })
     .get('/students', (request, response) => {
         return getStudentsController.handle(request, response)
+    })
+    .get('/search/students', (request, response) => {
+        return getFilteredStudentsController.handle(request, response)
     })
