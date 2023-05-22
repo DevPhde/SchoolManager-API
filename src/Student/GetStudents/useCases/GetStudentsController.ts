@@ -8,7 +8,7 @@ export class GetStudentsController {
     async handle(request: Request, response: Response): Promise<Response> {
         const page = parseInt(request.query.page as string, 10) || 1;
         const limit = parseInt(request.query.limit as string, 10) || 10;
-
+        
         try {
             const students = await this.getStudentsUseCase.exec({
                 page,

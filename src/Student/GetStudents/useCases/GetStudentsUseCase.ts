@@ -7,6 +7,9 @@ export class GetStudentsUseCase {
     ){}
 
     async exec(data: IGetStudentsDTO): Promise<IResponseGetStudentsDTO> {
-        return this.getStudentsRepository.getStudents(data)
+        return {
+            result: await this.getStudentsRepository.getStudents(data),
+            nextPage: await this.getStudentsRepository.nextPage(data)
+        }
     }
 }
