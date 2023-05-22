@@ -5,7 +5,7 @@ export class DeleteStudentUseCase {
         private deleteStudentQueryRepository: DeleteStudentQueryRepository
     ){}
 
-    async exec(user: IDeleteStudentDTO): Promise<void> {
-        return await this.deleteStudentQueryRepository.delete(user)
+    async exec(student: IDeleteStudentDTO): Promise<void> {
+        return await this.deleteStudentQueryRepository.delete(student)
     }
 }
