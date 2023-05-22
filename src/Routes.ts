@@ -2,7 +2,7 @@ import { Router } from "express";
 import { createStudentController } from "./Student/CreateStudent/Index";
 import { getStudentsController } from "./Student/GetStudents/Index";
 import { getFilteredStudentsController } from "./Student/GetFilteredStudents/Index";
-
+import { deleteStudentController } from "./Student/DeleteStudent/Index";
 export const routes = Router()
 
 routes
@@ -15,4 +15,7 @@ routes
     })
     .get('/search/students', (request, response) => {
         return getFilteredStudentsController.handle(request, response)
+    })
+    .delete('/student/:id', (request, response) => {
+        return deleteStudentController.handle(request, response)
     })
