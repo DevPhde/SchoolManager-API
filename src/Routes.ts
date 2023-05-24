@@ -8,6 +8,7 @@ import { createTeacherController } from "./Teacher/CreateTeacher/Index";
 import { deleteTeacherController } from "./Teacher/DeleteTeacher/Index";
 import { getFilteredTeachersController } from "./Teacher/GetFilteredTeachers/Index";
 import { getTeachersController } from "./Teacher/GetTeachers/Index";
+import { updateTeacherController } from "./Teacher/UpdateTeacher/Index";
 export const routes = Router()
 
 routes
@@ -38,4 +39,7 @@ routes
     })
     .get('/teachers', (request, response) => {
         return getTeachersController.handle(request, response)
+    })
+    .put('/teacher/:id', (request, response) => {
+        return updateTeacherController.handle(request, response)
     })
