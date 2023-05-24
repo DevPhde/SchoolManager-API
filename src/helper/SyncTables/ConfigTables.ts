@@ -8,7 +8,9 @@ export async function syncTables() {
         const query = `
       CREATE TABLE IF NOT EXISTS classes (
         id SERIAL PRIMARY KEY,
-        name VARCHAR(100) NOT NULL
+        number INT NOT NULL,
+        schedule VARCHAR(100) NOT NULL,
+        CONSTRAINT classes_number_unique UNIQUE (number)
       );
 
       CREATE TABLE IF NOT EXISTS students (
@@ -17,7 +19,7 @@ export async function syncTables() {
         email VARCHAR(100) NOT NULL,
         cpf VARCHAR(14) NOT NULL,
         class INT,
-        FOREIGN KEY (class) REFERENCES classes(id)
+        FOREIGN KEY (class) REFERENCES classes(number)
       );
 
       CREATE TABLE IF NOT EXISTS teachers (
@@ -26,7 +28,7 @@ export async function syncTables() {
         email VARCHAR(100) NOT NULL,
         cpf VARCHAR(14) NOT NULL,
         class INT,
-        FOREIGN KEY (class) REFERENCES classes(id)
+        FOREIGN KEY (class) REFERENCES classes(number)
       );
     `;
 
