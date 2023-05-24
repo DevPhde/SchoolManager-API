@@ -3,6 +3,7 @@ import { createStudentController } from "./Student/CreateStudent/Index";
 import { getStudentsController } from "./Student/GetStudents/Index";
 import { getFilteredStudentsController } from "./Student/GetFilteredStudents/Index";
 import { deleteStudentController } from "./Student/DeleteStudent/Index";
+import { updateStudentController } from "./Student/UpdateStudent/Index";
 export const routes = Router()
 
 routes
@@ -18,4 +19,7 @@ routes
     })
     .delete('/student/:id', (request, response) => {
         return deleteStudentController.handle(request, response)
+    })
+    .put('/student/:id', (request, response) => {
+        return updateStudentController.handle(request, response)
     })
