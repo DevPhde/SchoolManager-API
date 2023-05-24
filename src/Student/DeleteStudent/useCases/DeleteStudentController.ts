@@ -7,9 +7,9 @@ export class DeleteStudentController {
 
     async handle(request: Request, response: Response): Promise<Response> {
         const {id} = request.params
-
+        
         try {
-            await this.deleteStudentUseCase.exec({id: parseInt(id)})
+            await this.deleteStudentUseCase.exec({id: parseInt(id as string)})
 
             return response.sendStatus(200)
         } catch (err) {
