@@ -18,8 +18,8 @@ export class GetFilteredStudentsController {
             })
             return response.status(200).json({
                 page: page,
-                next: result.nextPage ? `/search/students?search=teste5&page=${page + 1}&limit=${limit}` : "",
-                previous: page != 1 ? `/search/students?search=teste5&page=${page - 1}&limit=${limit}` : "",
+                next: result.nextPage ? `/search/students?search=${search}&page=${page + 1}&limit=${limit}` : "",
+                previous: page != 1 ? `/search/students?search=${search}&page=${page - 1}&limit=${limit}` : "",
                 result: result.result
             })
         } catch (err) {
