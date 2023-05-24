@@ -7,6 +7,7 @@ import { updateStudentController } from "./Student/UpdateStudent/Index";
 import { createTeacherController } from "./Teacher/CreateTeacher/Index";
 import { deleteTeacherController } from "./Teacher/DeleteTeacher/Index";
 import { getFilteredTeachersController } from "./Teacher/GetFilteredTeachers/Index";
+import { getTeachersController } from "./Teacher/GetTeachers/Index";
 export const routes = Router()
 
 routes
@@ -34,4 +35,7 @@ routes
     })
     .get('/search/teachers', (request, response) => {
         return getFilteredTeachersController.handle(request, response)
+    })
+    .get('/teachers', (request, response) => {
+        return getTeachersController.handle(request, response)
     })
