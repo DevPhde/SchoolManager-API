@@ -4,6 +4,8 @@ import { getStudentsController } from "./Student/GetStudents/Index";
 import { getFilteredStudentsController } from "./Student/GetFilteredStudents/Index";
 import { deleteStudentController } from "./Student/DeleteStudent/Index";
 import { updateStudentController } from "./Student/UpdateStudent/Index";
+import { createTeacherController } from "./Teacher/CreateTeacher/Index";
+import { deleteTeacherController } from "./Teacher/DeleteTeacher/Index";
 export const routes = Router()
 
 routes
@@ -22,4 +24,10 @@ routes
     })
     .put('/student/:id', (request, response) => {
         return updateStudentController.handle(request, response)
+    })
+    .post('/new/teacher', (request, response) => {
+        return createTeacherController.handle(request, response)
+    })
+    .delete('/teacher/:id', (request, response) => {
+        return deleteTeacherController.handle(request, response)
     })
