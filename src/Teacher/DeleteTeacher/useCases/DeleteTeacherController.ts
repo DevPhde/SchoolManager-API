@@ -13,7 +13,7 @@ export class DeleteTeacherController {
 
             return response.sendStatus(200)
         } catch (err) {
-            return response.send(400).json({
+            return response.status(400).json({
                 message: err.message || 'Unexpected Error'
             })
         }
