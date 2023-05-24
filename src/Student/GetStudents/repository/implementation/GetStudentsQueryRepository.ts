@@ -2,7 +2,7 @@ import { IGetStudentsRepository } from "../IGetStudentsRepository";
 import { IGetStudentsDTO } from "../../useCases/IGetStudentsDTO";
 import { pool } from "../../../../database/DatabaseConfig";
 
-export class GetStudentsRepository implements IGetStudentsRepository {
+export class GetStudentsQueryRepository implements IGetStudentsRepository {
     async getStudents(data: IGetStudentsDTO): Promise<object[]> {
         const client = await pool.connect()
         try {

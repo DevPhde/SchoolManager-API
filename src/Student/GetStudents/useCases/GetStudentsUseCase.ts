@@ -1,15 +1,15 @@
 import { IGetStudentsDTO, IResponseGetStudentsDTO } from "./IGetStudentsDTO";
-import { GetStudentsRepository } from "../repository/implementation/GetStudentsQueryRepository";
+import { GetStudentsQueryRepository } from "../repository/implementation/GetStudentsQueryRepository";
 
 export class GetStudentsUseCase {
     constructor(
-        private getStudentsRepository: GetStudentsRepository
+        private getStudentsQueryRepository: GetStudentsQueryRepository
     ){}
 
     async exec(data: IGetStudentsDTO): Promise<IResponseGetStudentsDTO> {
         return {
-            result: await this.getStudentsRepository.getStudents(data),
-            nextPage: await this.getStudentsRepository.nextPage(data)
+            result: await this.getStudentsQueryRepository.getStudents(data),
+            nextPage: await this.getStudentsQueryRepository.nextPage(data)
         }
     }
 }
