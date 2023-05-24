@@ -6,6 +6,7 @@ import { deleteStudentController } from "./Student/DeleteStudent/Index";
 import { updateStudentController } from "./Student/UpdateStudent/Index";
 import { createTeacherController } from "./Teacher/CreateTeacher/Index";
 import { deleteTeacherController } from "./Teacher/DeleteTeacher/Index";
+import { getFilteredTeachersController } from "./Teacher/GetFilteredTeachers/Index";
 export const routes = Router()
 
 routes
@@ -30,4 +31,7 @@ routes
     })
     .delete('/teacher/:id', (request, response) => {
         return deleteTeacherController.handle(request, response)
+    })
+    .get('/search/teachers', (request, response) => {
+        return getFilteredTeachersController.handle(request, response)
     })
