@@ -9,10 +9,11 @@ import { deleteTeacherController } from "./Teacher/DeleteTeacher/Index";
 import { getFilteredTeachersController } from "./Teacher/GetFilteredTeachers/Index";
 import { getTeachersController } from "./Teacher/GetTeachers/Index";
 import { updateTeacherController } from "./Teacher/UpdateTeacher/Index";
+import { createClassController } from "./Class/CreateClass/Index"
 export const routes = Router()
 
 routes
-    .get('/', (request, response) => { response.status(200).send('Connection OK')})
+    .get('/', (request, response) => { response.status(200).send('Connection OK') })
     .post('/new/student', (request, response) => {
         return createStudentController.handle(request, response)
     })
@@ -42,4 +43,7 @@ routes
     })
     .put('/teacher/:id', (request, response) => {
         return updateTeacherController.handle(request, response)
+    })
+    .post('/new/class', (request, response) => {
+        return createClassController.handle(request, response)
     })

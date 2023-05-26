@@ -7,12 +7,14 @@ export class CreateClassController {
     ) { }
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const { number, schedule } = request.body;
+        const { number, schedule, students, teacher } = request.body;
 
         try {
             await this.createClassUseCase.exec({
                 number,
-                schedule
+                schedule,
+                students,
+                teacher
             })
             return response.sendStatus(201)
         } catch (err) {
