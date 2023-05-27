@@ -10,6 +10,7 @@ import { getFilteredTeachersController } from "./Teacher/GetFilteredTeachers/Ind
 import { getTeachersController } from "./Teacher/GetTeachers/Index";
 import { updateTeacherController } from "./Teacher/UpdateTeacher/Index";
 import { createClassController } from "./Class/CreateClass/Index"
+import { getClassesController } from "./Class/GetClasses/Index";
 export const routes = Router()
 
 routes
@@ -46,4 +47,7 @@ routes
     })
     .post('/new/class', (request, response) => {
         return createClassController.handle(request, response)
+    })
+    .get('/classes', (request, response) => {
+        return getClassesController.handle(request, response)
     })
