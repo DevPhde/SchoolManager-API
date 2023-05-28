@@ -11,6 +11,7 @@ import { getTeachersController } from "./Teacher/GetTeachers/Index";
 import { updateTeacherController } from "./Teacher/UpdateTeacher/Index";
 import { createClassController } from "./Class/CreateClass/Index"
 import { getClassesController } from "./Class/GetClasses/Index";
+import { getFilteredClassesController } from "./Class/GetFilteredClasses/Index";
 export const routes = Router()
 
 routes
@@ -50,4 +51,7 @@ routes
     })
     .get('/classes', (request, response) => {
         return getClassesController.handle(request, response)
+    })
+    .get('/search/classes', (request, response) => {
+        return getFilteredClassesController.handle(request, response)
     })
