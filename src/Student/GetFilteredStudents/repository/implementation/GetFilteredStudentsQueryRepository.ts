@@ -6,7 +6,7 @@ export class GetFilteredStudentsQueryRepository implements IGetFilteredStudentsR
     async getFilteredStudents(data: IGetFilteredStudentsDTO): Promise<object[]> {
         const client = await pool.connect();
         try {
-            return (await client.query('SELECT * FROM students WHERE name = $1 OFFSET $2 LIMIT $3', [data.search, (data.page - 1) * data.limit, data.limit])).rows
+            return (await client.query(`SELECT * FROM students WHERE name LIKE $1 || '%' OR cpf LIKE $1 || '%' OR email LIKE $1 || '%' OFFSET $2 LIMIT $3`, [data.search, (data.page - 1) * data.limit, data.limit])).rows
         } catch (err) {
             console.error('Error: ', err);
         } finally {
@@ -17,7 +17,7 @@ export class GetFilteredStudentsQueryRepository implements IGetFilteredStudentsR
     async nextPage(data: IGetFilteredStudentsDTO): Promise<boolean> {
         const client = await pool.connect();
         try {
-            return (await client.query('SELECT * FROM students WHERE name = $1 OFFSET $2 LIMIT $3', [data.search, data.page * data.limit, data.limit])).rows.length ? true : false
+            return (await client.query(`SELECT * FROM students WHERE name LIKE $1 || '%' OR cpf LIKE $1 || '%' OR email LIKE $1 || '%' OFFSET $2 LIMIT $3`, [data.search, data.page * data.limit, data.limit])).rows.length ? true : false
         } catch (err) {
             console.error('Error: ', err);
         } finally {
