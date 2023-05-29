@@ -9,11 +9,13 @@ Este é um projeto criado utilizando as tecnologias Node e TypeScript, com o obj
 
 ## :wrench: Tecnologias Utilizadas
 
-Express.js, TypeScript, PostgreSQL e Docker.
+Express.js, TypeScript, PostgreSQL, Redis, Bull(Queue Lib) e Docker.
 
 <img align="left" height="50em" src="https://www.edureka.co/blog/wp-content/uploads/2019/07/express-logo.png" />
 <img align="left" height="50em" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" />
 <img align="left" height="50em" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-plain-wordmark.svg" />
+<img align="left" height="50em" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original-wordmark.svg" />
+<img align="left" height="40em" src="https://github.com/DevPhde/SchoolManager-API/assets/113299561/375ca4a3-cfdf-4ef0-b4c4-499a7f2f3ccb"/>
 <img align="left" height="50em" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" />
 <br>
 <br>
