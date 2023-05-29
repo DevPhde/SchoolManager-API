@@ -7,12 +7,12 @@ export class GetFilteredClassesQueryRepository implements IGetFilteredClassesRep
         const client = await pool.connect();
         try {
             return (await client.query(`
-            SELECT classes.number AS class, classes.schedule, ARRAY_AGG(students.id) AS students, teachers.id AS teacher
+            SELECT classes.id, classes.number AS class, classes.schedule, ARRAY_AGG(students.id) AS students, teachers.id AS teacher
             FROM students
             INNER JOIN classes ON students.class = classes.number
             INNER JOIN teachers ON teachers.class = classes.number
             WHERE CAST(classes.number AS TEXT) LIKE $1 || '%' OR CAST(classes.schedule AS TEXT) LIKE $1 || '%'
-            GROUP BY classes.number, classes.schedule, teachers.id
+            GROUP BY classes.id, classes.number, classes.schedule, teachers.id
             OFFSET $2 LIMIT $3
             `, [data.search, (data.page - 1) * data.limit, data.limit])).rows
         } catch (err) {
@@ -26,12 +26,12 @@ export class GetFilteredClassesQueryRepository implements IGetFilteredClassesRep
         console.log(data)
         try {
             return (await client.query(`
-            SELECT classes.number AS class, classes.schedule, ARRAY_AGG(students.id) AS students, teachers.id AS teacher
+            SELECT classes.id, classes.number AS class, classes.schedule, ARRAY_AGG(students.id) AS students, teachers.id AS teacher
             FROM students
             INNER JOIN classes ON students.class = classes.number
             INNER JOIN teachers ON teachers.class = classes.number
             WHERE CAST(classes.number AS TEXT) LIKE $1 || '%' OR CAST(classes.schedule AS TEXT) LIKE $1 || '%'
-            GROUP BY classes.number, classes.schedule, teachers.id
+            GROUP BY classes.id, classes.number, classes.schedule, teachers.id
             OFFSET $2 LIMIT $3
             `, [data.search, data.page * data.limit, data.limit])).rows.length ? true : false;
         } catch (err) {
