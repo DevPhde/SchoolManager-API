@@ -7,14 +7,17 @@ export class GetClassesQueryRepository implements IGetClassesRepositry {
         console.log(data)
         const client = await pool.connect();
         try {
-            return (await client.query(`
-            SELECT classes.number AS class, classes.schedule, ARRAY_AGG(students.id) AS students, teachers.id AS teacher
+            const classes = (await client.query(`
+            SELECT classes.id ,classes.number AS class, classes.schedule, ARRAY_AGG(students.id) AS students, teachers.id AS teacher
             FROM students
             INNER JOIN classes ON students.class = classes.number
             INNER JOIN teachers ON teachers.class = classes.number
-            GROUP BY classes.number, classes.schedule, teachers.id
+            GROUP BY classes.id, classes.number, classes.schedule, teachers.id
             OFFSET $1 LIMIT $2
             `, [(data.page - 1) * data.limit, data.limit])).rows
+            // const classes = ((await client.query(`SELECT * FROM classes`)).rows)
+            console.log(classes)
+            return classes
         } catch (err) {
             console.error('Error: ', err)
         } finally {
@@ -25,11 +28,11 @@ export class GetClassesQueryRepository implements IGetClassesRepositry {
         const client = await pool.connect();
         try {
             return (await client.query(`
-            SELECT classes.number AS class, classes.schedule, ARRAY_AGG(students.id) AS students, teachers.id AS teacher
+            SELECT classes.id, classes.number AS class, classes.schedule, ARRAY_AGG(students.id) AS students, teachers.id AS teacher
             FROM students
             INNER JOIN classes ON students.class = classes.number
             INNER JOIN teachers ON teachers.class = classes.number
-            GROUP BY classes.number, classes.schedule, teachers.id
+            GROUP BY classes.id, classes.number, classes.schedule, teachers.id
             OFFSET $1 LIMIT $2
             `, [data.page * data.limit, data.limit])).rows.length ? true : false;
         } catch (err) {
