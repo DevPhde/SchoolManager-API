@@ -15,8 +15,6 @@ export class GetClassesQueryRepository implements IGetClassesRepositry {
             GROUP BY classes.id, classes.number, classes.schedule, teachers.id
             OFFSET $1 LIMIT $2
             `, [(data.page - 1) * data.limit, data.limit])).rows
-            // const classes = ((await client.query(`SELECT * FROM classes`)).rows)
-            console.log(classes)
             return classes
         } catch (err) {
             console.error('Error: ', err)
