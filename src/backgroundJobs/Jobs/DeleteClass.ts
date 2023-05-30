@@ -1,24 +1,25 @@
 import { JobsQueryRepository } from "../repository/implementation/JobsQueryRepository"
 
 export default {
-    key: 'UpdateTeacherClass',
+    key: 'DeleteClass',
     options: {
-        priority: 1,
+        priority: 2,
         attempts: 3,
         backoff: {
             type: 'exponential',
-            delay: 1000
+            delay: 2000
         }
     },
-    async handle( update ) {
-        const { data: { id, classNumber } } = update
-        console.log("teacher: ", id)
+    async handle(data) {
+        const { data: { id } } = data
+        console.log('class: ', id)
         const jobsQueryRepository = new JobsQueryRepository();
         try {
-            return await jobsQueryRepository.updateTeacherClass(id, classNumber)
+            return await jobsQueryRepository.deleteClassController(id)
         } catch (err) {
             throw new Error()
         }
 
     }
 }
+

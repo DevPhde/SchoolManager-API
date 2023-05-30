@@ -3,10 +3,14 @@ import { JobsQueryRepository } from "../repository/implementation/JobsQueryRepos
 export default {
     key: 'UpdateStudentClass',
     options: {
-        priority: 1
+        priority: 1,
+        attempts: 3,
+        backoff: {
+            type: 'exponential',
+            delay: 1000
+        }
     },
     async handle( update ) {
-        console.log('oi')
         const { data: { id, classNumber } } = update
         console.log('student: ', id)
         const jobsQueryRepository = new JobsQueryRepository();

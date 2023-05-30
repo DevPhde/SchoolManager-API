@@ -2,7 +2,7 @@ import { pool } from "../../../database/DatabaseConfig";
 import { IJobsRepository } from "../IJobsRepository";
 
 export class JobsQueryRepository implements IJobsRepository {
- 
+
     async updateStudentClass(id: number, classNumber: number): Promise<void> {
         console.log(id, classNumber)
         const client = await pool.connect();
@@ -25,4 +25,15 @@ export class JobsQueryRepository implements IJobsRepository {
             client.release()
         }
     }
+    async deleteClassController(id: number): Promise<void> {
+        const client = await pool.connect();
+        try {
+            await client.query(`DELETE FROM classes WHERE id = $1`, [id])
+        } catch (err) {
+            throw new Error()
+        } finally {
+            client.release()
+        }
+    }
+
 }
