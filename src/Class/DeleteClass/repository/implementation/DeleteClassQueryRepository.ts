@@ -5,8 +5,8 @@ import { IObjectToDeleteClassDTO } from "../../useCases/IDeleteClassDTO";
 
 export class DeleteClassQueryRepository implements IDeleteClassRepository {
     async delete(data: IObjectToDeleteClassDTO): Promise<void> {
-
         const client = await pool.connect();
+
         try {          
             await Queue.add('UpdateTeacherClass', { id: data.teacherId, classNumber: null })
             for (let index = 0; index < data.studentsId.length; index++) {
@@ -22,7 +22,7 @@ export class DeleteClassQueryRepository implements IDeleteClassRepository {
     async getClassNumber(id: number): Promise<number> {
         const client = await pool.connect();
         try {
-            return  parseInt((await client.query(`SELECT classes.number AS class FROM classes WHERE id = $1`, [id])).rows.pop().class);
+            return parseInt((await client.query(`SELECT classes.number AS class FROM classes WHERE id = $1`, [id])).rows.pop().class);
         } catch (err) {
             console.error('Error: ', err)
         } finally {

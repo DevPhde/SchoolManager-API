@@ -10,12 +10,12 @@ export class DeleteClassUseCase {
         const classNumber = await this.deleteClassQueryRepository.getClassNumber(data.id);
         const teacherId = await this.deleteClassQueryRepository.getTeacherId(classNumber);
         const studentsId = await this.deleteClassQueryRepository.getStudentsId(classNumber);
-
+        
         return this.deleteClassQueryRepository.delete({
             id: data.id,
-            classNumber,
-            studentsId,
-            teacherId
+            classNumber: classNumber,
+            studentsId: studentsId,
+            teacherId: teacherId
         });
     }
 }
