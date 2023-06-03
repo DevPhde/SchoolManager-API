@@ -13,6 +13,7 @@ import { createClassController } from "./Class/CreateClass/Index"
 import { getClassesController } from "./Class/GetClasses/Index";
 import { getFilteredClassesController } from "./Class/GetFilteredClasses/Index";
 import { deleteClassController } from "./Class/DeleteClass/Index";
+import { updateClassController } from "./Class/UpdateClass/Index";
 export const routes = Router()
 
 routes
@@ -58,4 +59,7 @@ routes
     })
     .delete('/class/:id', (request, response) => {
         return deleteClassController.handle(request, response)
+    })
+    .put('/class/:id', (request, response) => {
+        return updateClassController.handle(request, response)
     })
