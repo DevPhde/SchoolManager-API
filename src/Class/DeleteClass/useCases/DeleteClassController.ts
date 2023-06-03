@@ -13,6 +13,7 @@ export class DeleteClassController {
             await this.deleteClassUseCase.exec({
                 id: parseInt(id as string)
             })
+            return response.sendStatus(200)
         } catch (err) {
             return response.status(400).json({
                 message: err.message || 'Unexpected Error'
