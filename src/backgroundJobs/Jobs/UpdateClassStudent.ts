@@ -1,4 +1,10 @@
 import { JobsQueryRepository } from "../repository/implementation/JobsQueryRepository"
+interface IUpdate {
+    data: {
+        id: number;
+        classNumber: number;
+    }
+}
 
 export default {
     key: 'UpdateStudentClass',
@@ -10,9 +16,9 @@ export default {
             delay: 1000
         }
     },
-    async handle( update ) {
+    async handle( update:IUpdate ) {
         const { data: { id, classNumber } } = update
-        console.log('student: ', id)
+        console.log('update student: ', id)
         const jobsQueryRepository = new JobsQueryRepository();
         try {
             return await jobsQueryRepository.updateStudentClass(id, classNumber)

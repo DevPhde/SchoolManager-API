@@ -4,7 +4,6 @@ import { IJobsRepository } from "../IJobsRepository";
 export class JobsQueryRepository implements IJobsRepository {
 
     async updateStudentClass(id: number, classNumber: number): Promise<void> {
-        console.log(id, classNumber)
         const client = await pool.connect();
         try {
             await client.query('UPDATE students SET class = $1 WHERE id = $2', [classNumber, id])
