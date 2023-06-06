@@ -1,4 +1,10 @@
 import { JobsQueryRepository } from "../repository/implementation/JobsQueryRepository"
+interface IData {
+    data: {
+        id: number;
+        classNumber: number;
+    }
+}
 
 export default {
     key: 'DeleteClass',
@@ -10,9 +16,8 @@ export default {
             delay: 2000
         }
     },
-    async handle(data) {
+    async handle(data: IData) {
         const { data: { id } } = data
-        console.log('class: ', id)
         const jobsQueryRepository = new JobsQueryRepository();
         try {
             return await jobsQueryRepository.deleteClassController(id)

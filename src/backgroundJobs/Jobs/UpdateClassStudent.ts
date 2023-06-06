@@ -18,7 +18,6 @@ export default {
     },
     async handle( update:IUpdate ) {
         const { data: { id, classNumber } } = update
-        console.log('update student: ', id)
         const jobsQueryRepository = new JobsQueryRepository();
         try {
             return await jobsQueryRepository.updateStudentClass(id, classNumber)
