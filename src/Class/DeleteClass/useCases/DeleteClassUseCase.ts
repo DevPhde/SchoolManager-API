@@ -8,18 +8,20 @@ export class DeleteClassUseCase {
     ) { }
 
     async exec(data: IDeleteClassDTO): Promise<void> {
-        if(!await this.deleteClassQueryRepository.haveRegisteredClass(data.id)) {
+        const classNumber = await this.deleteClassQueryRepository.getClass(data.id);
+        if(!classNumber) {
             throw new Error(`Turma ID: ${data.id} não existe.`)
         }
-        const classNumber = await this.deleteClassQueryRepository.getClassNumber(data.id);
         const teacherId = await this.deleteClassQueryRepository.getTeacherId(classNumber);
         const studentsId = await this.deleteClassQueryRepository.getStudentsId(classNumber);
         try {
-            await this.jobQueue.add('UpdateTeacherClass', { id: teacherId, classNumber: null })
+            if(teacherId) {
+                await this.jobQueue.add('UpdateTeacherClass', { id: teacherId, classNumber: null })
+            }
             for (let index = 0; index < studentsId.length; index++) {
                 await this.jobQueue.add('UpdateStudentClass', { id: studentsId[index], classNumber: null })
             }
-            await this.jobQueue.add('DeleteClass', { id: data.id })
+            await this.jobQueue.add('DeleteClass', { id: data.id, classNumber: classNumber })
             return
         } catch (err) {
             throw new Error(err)

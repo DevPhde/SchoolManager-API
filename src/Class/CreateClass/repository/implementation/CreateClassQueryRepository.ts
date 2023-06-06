@@ -8,7 +8,7 @@ export class CreateClassQueryRepository implements ICreateClassRepository {
         try {
             return (await client.query('SELECT * FROM classes WHERE number = $1', [number])).rows
         } catch (err) {
-            console.error('Error: ', err)
+            throw new Error('Database Error (error code: CCQR 11L)')
         } finally {
             client.release()
         }
@@ -19,7 +19,7 @@ export class CreateClassQueryRepository implements ICreateClassRepository {
         try {
             await client.query('INSERT INTO classes (number, schedule) VALUES ($1, $2)', [data.number, data.schedule])
         } catch (err) {
-            console.error('Error: ', err)
+            throw new Error('Database Error (error code: CCQR 11L)')
         } finally {
             client.release();
         }

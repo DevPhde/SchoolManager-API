@@ -1,5 +1,5 @@
 import { IUpdateClassDTO } from "./IUpdateClassDTO";
-import { UpdateClassQueryRepository } from "../repository/implementation/UpdateClassRepository";
+import { UpdateClassQueryRepository } from "../repository/implementation/UpdateClassQueryRepository";
 import { JobQueue } from "../../../backgroundJobs/Config/JobQueue";
 
 
@@ -28,7 +28,7 @@ export class UpdateClassUseCase {
             const studentsIdInClass = await this.updateClassQueryRepository.getClassStudents(data.id);
             const removeStudent = studentsIdInClass.filter(value => !data.students.includes(value));
             const addStudent = data.students.filter(value => !studentsIdInClass.includes(value));
-            
+
             for (let index = 0; index < removeStudent.length; index++) {
                 this.jobQueue.add('UpdateStudentClass', { id: removeStudent[index], classNumber: null });
             }

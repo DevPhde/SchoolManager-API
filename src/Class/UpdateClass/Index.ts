@@ -1,5 +1,5 @@
 import { JobQueue } from "../../backgroundJobs/Config/JobQueue";
-import { UpdateClassQueryRepository } from "./repository/implementation/UpdateClassRepository";
+import { UpdateClassQueryRepository } from "./repository/implementation/UpdateClassQueryRepository";
 import { UpdateClassUseCase } from "./useCases/UpdateClassUseCase";
 import { UpdateClassController } from "./useCases/UpdateClassController";
 

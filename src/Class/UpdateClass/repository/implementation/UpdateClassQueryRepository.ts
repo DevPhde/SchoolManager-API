@@ -9,7 +9,7 @@ export class UpdateClassQueryRepository implements IUpdateClassRepository {
             const classNumber = (await client.query(`SELECT * FROM classes WHERE id = $1`, [id])).rows.pop().number
             return (await client.query(`SELECT students.id FROM students WHERE class = $1`, [classNumber])).rows.map(student => student.id)
         } catch (err) {
-            console.error('Error: ', err)
+            throw new Error('Database Error (error code: UCQR 12L)')
         } finally {
             client.release();
         }
@@ -27,7 +27,7 @@ export class UpdateClassQueryRepository implements IUpdateClassRepository {
             GROUP BY classes.id, classes.number, classes.schedule, teachers.id
             `, [id])).rows.pop()
         } catch (err) {
-            console.error('Error: ', err)
+            throw new Error('Database Error (error code: UCQR 30L)')
         } finally {
             client.release();
         }
@@ -39,7 +39,7 @@ export class UpdateClassQueryRepository implements IUpdateClassRepository {
         try {
             return (await client.query(`UPDATE classes SET schedule = $1 WHERE id = $2 `, [schedule, id])).rows.pop()
         } catch (err) {
-            console.error('Error: ', err)
+            throw new Error('Database Error (error code: UCQR 42L)')
         } finally {
             client.release();
         }

@@ -1,6 +1,5 @@
 export interface IDeleteClassRepository {
-    getClassNumber(id: number): Promise<number>;
+    getClass(id: number): Promise<number | null>;
     getStudentsId(classNumber: number): Promise<number[]>;
-    getTeacherId(classNumber: number): Promise<number>;
-    haveRegisteredClass(id: number): Promise<boolean>;
+    getTeacherId(classNumber: number): Promise<number | null>;
 }

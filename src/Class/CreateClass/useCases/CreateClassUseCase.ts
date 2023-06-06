@@ -25,6 +25,7 @@ export class CreateClassUseCase {
             await this.createClassQueryRepository.save(class_)
 
             await this.jobQueue.add('UpdateTeacherClass', { id: data.teacher, classNumber: data.number });
+
             for (let index = 0; index < data.students.length; index++) {
                 await this.jobQueue.add('UpdateStudentClass', { id: data.students[index], classNumber: data.number });
             }
