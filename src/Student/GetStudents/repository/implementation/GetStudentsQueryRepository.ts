@@ -8,8 +8,7 @@ export class GetStudentsQueryRepository implements IGetStudentsRepository {
         try {
             return (await client.query('SELECT * FROM students OFFSET $1 LIMIT $2', [(data.page - 1) * data.limit, data.limit])).rows
         } catch (err) {
-            console.error('error: ', err);
-            client.release()
+            throw new Error('Database Error (error code: GSQR 11L)')
         } finally {
             client.release()
         }
@@ -20,7 +19,7 @@ export class GetStudentsQueryRepository implements IGetStudentsRepository {
         try {
             return (await client.query('SELECT * FROM students OFFSET $1 LIMIT $2', [data.page * data.limit, data.limit])).rows.length ? true : false
         } catch (err) {
-            console.error('Error: ', err);
+            throw new Error('Database Error (error code: GSQR 11L)')
         } finally {
             client.release();
         }

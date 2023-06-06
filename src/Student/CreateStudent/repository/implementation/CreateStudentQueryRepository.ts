@@ -5,12 +5,11 @@ import { pool } from "../../../../database/DatabaseConfig";
 export class CreateStudentQueryRepository implements ICreateStudentRepository {
 
     async findStudentByCpf(cpf: string): Promise<any[]> {
-        console.log(cpf)
         const client = await pool.connect()
         try {
             return  (await client.query(`SELECT * FROM students WHERE cpf = '${cpf}'`)).rows            
         } catch (err) {
-            console.error("erro: ", err)
+            throw new Error('Database Error (error code: CSQR 13L)')
         } finally {
             client.release()
         }
@@ -24,7 +23,7 @@ export class CreateStudentQueryRepository implements ICreateStudentRepository {
             const values = [student.name, student.email, student.cpf];
             await client.query(query, values);
         } catch (err) {
-            console.error('error: ', err)
+            throw new Error('Database Error (error code: CSQR 26L)')
         } finally {
             client.release()
         }

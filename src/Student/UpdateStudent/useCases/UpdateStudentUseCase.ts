@@ -3,17 +3,17 @@ import { UpdateStudentQueryRepository } from "../repository/implementation/Updat
 export class UpdateStudentUseCase {
     constructor(
         private updateStudentQueryRepository: UpdateStudentQueryRepository
-    ){}
+    ) { }
 
     async exec(student: IUpdateStudentDTO): Promise<void> {
-        const {id, name, email} = student
-        if(!id || (!name && !email)) {
+        const { id, name, email } = student
+        if (!id || (!name && !email)) {
             throw new Error('Campos não preenchidos');
         }
         return await this.updateStudentQueryRepository.update({
             id,
-            ...(name && {name}),
-            ...(email && {email})
+            ...(name && { name }),
+            ...(email && { email })
         })
     }
 }

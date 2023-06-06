@@ -10,11 +10,10 @@ export class CreateStudentUseCase {
 
     async execute(data: ICreateStudentDTO): Promise<void> {
         if(!isEmpty(await this.createStudentQueryRepository.findStudentByCpf(data.cpf))) {
-            console.log('oi')
             throw new Error('CPF já cadastrado.')
         }
         
         const student = new StudentEntity(data)
-        await this.createStudentQueryRepository.save(student);
+        return await this.createStudentQueryRepository.save(student);
     }
 }

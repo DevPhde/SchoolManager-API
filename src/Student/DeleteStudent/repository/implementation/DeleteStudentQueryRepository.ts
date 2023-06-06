@@ -8,7 +8,7 @@ export class DeleteStudentQueryRepository implements IDeleteStudentRepository {
         try {
             client.query('DELETE FROM students WHERE id = $1', [id.id])
         } catch (err) {
-            console.error('Error: ', err)
+            throw new Error('Database Error (error code: DSQR 11L)')
         } finally {
             client.release();
         }

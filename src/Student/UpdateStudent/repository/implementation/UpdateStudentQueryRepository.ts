@@ -11,7 +11,7 @@ export class UpdateStudentQueryRepository implements IUpdateStudentRepository {
             const [query, values] = queryHelper(student)
             await client.query(query, values)
         } catch (err) {
-            console.error('Error: ', err)
+            throw new Error('Database Error (error code: USQR 14L)')
         } finally {
             client.release();
         }

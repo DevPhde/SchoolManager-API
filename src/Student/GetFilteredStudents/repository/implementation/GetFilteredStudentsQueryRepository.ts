@@ -8,7 +8,7 @@ export class GetFilteredStudentsQueryRepository implements IGetFilteredStudentsR
         try {
             return (await client.query(`SELECT * FROM students WHERE name LIKE $1 || '%' OR cpf LIKE $1 || '%' OR email LIKE $1 || '%' OFFSET $2 LIMIT $3`, [data.search, (data.page - 1) * data.limit, data.limit])).rows
         } catch (err) {
-            console.error('Error: ', err);
+            throw new Error('Database Error (error code: GFSQR 11L)')
         } finally {
             client.release()
         }
@@ -19,7 +19,7 @@ export class GetFilteredStudentsQueryRepository implements IGetFilteredStudentsR
         try {
             return (await client.query(`SELECT * FROM students WHERE name LIKE $1 || '%' OR cpf LIKE $1 || '%' OR email LIKE $1 || '%' OFFSET $2 LIMIT $3`, [data.search, data.page * data.limit, data.limit])).rows.length ? true : false
         } catch (err) {
-            console.error('Error: ', err);
+            throw new Error('Database Error (error code: GFSQR 11L)')
         } finally {
             client.release();
         }
