@@ -1,11 +1,13 @@
 # School Manager-API
 
-## :dart: Status do projeto
-Em construção
-
 ## :memo: Descrição do projeto
-Este é um projeto criado utilizando as tecnologias Node e TypeScript, com o objetivo de demonstrar minhas habilidades em abstração, Programação Orientada a Objetos (POO), princípios SOLID, CLEAN CODE e Domain-Driven Design (DDD).
+O projeto School Manager é uma API para gerenciamento escolar. Possibilita o cadastro de alunos, professores e criação de turmas, utilizando um professor e até 20 alunos.
 
+A aplicação utiliza a biblioteca Bull, responsável pelo gerenciamento de filas (queues) com suporte a prioridade e retry para determinados tipos de jobs. A persistência das filas é realizada através do Redis.
+
+Foi desenvolvida em TypeScript, seguindo padrões de projeto como SOLID (Princípios de Responsabilidade Única, Aberto/Fechado, Substituição de Liskov, Segregação de Interface e Inversão de Dependência), DDD (Domain-Driven Design) e Clean Architecture (Arquitetura Limpa). Esses padrões têm como objetivo promover a separação de preocupações, modularidade, testabilidade e escalabilidade do código.
+
+O framework Express.js foi utilizado para criação das APIs e queries SQL foram empregadas para acessar os dados no banco de dados PostgreSQL.
 
 ## :wrench: Tecnologias Utilizadas
 
@@ -20,8 +22,8 @@ Express.js, TypeScript, PostgreSQL, Redis, Bull(Queue Lib) e Docker.
 <br>
 <br>
 
-<!-- ## :rocket: Implementação futura
-* Sem planos futuros para o mesmo. -->
+## :rocket: Implementação futura
+* Sem planos futuros para o mesmo.
 
 <!-- ## Como Rodar o Projeto
 Observação: Para rodar o projeto é necessário ter o Docker instalado e configurado na máquina.
@@ -61,3 +63,5 @@ Observação: É importante lembrar que a primeira execução do comando pode le
 
 Com esses passos, o projeto deverá estar rodando corretamente na sua máquina.
  -->
+## :dart: Status do projeto
+Concluído.
