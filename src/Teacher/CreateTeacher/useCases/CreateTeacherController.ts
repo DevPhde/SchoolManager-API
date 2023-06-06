@@ -3,10 +3,10 @@ import { CreateTeacherUseCase } from "./CreateTeacherUseCase";
 export class CreateTeacherController {
     constructor(
         private createTeacherUseCase: CreateTeacherUseCase
-    ){}
+    ) { }
 
     async handle(request: Request, response: Response): Promise<Response> {
-        const {name, email, cpf} = request.body;
+        const { name, email, cpf } = request.body;
 
         try {
             await this.createTeacherUseCase.exec({

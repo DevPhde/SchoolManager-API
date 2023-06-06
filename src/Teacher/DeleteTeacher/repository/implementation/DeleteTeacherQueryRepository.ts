@@ -8,7 +8,7 @@ export class DeleteTeacherQueryRepository implements IDeleteTeacherRepository {
         try {
             await client.query('DELETE FROM teachers WHERE id = $1', [id]);
         } catch (err) {
-            console.error('Error: ', err)
+            throw new Error('Database Error (error code: DTQR 11L)')
         } finally {
             client.release()
         }

@@ -6,11 +6,11 @@ import { TeacherEntity } from "../entities/Teacher";
 export class CreateTeacherUseCase {
     constructor(
         private createTeacherQueryRepository: CreateTeacherQueryRepository
-    ){}
+    ) { }
 
     async exec(data: ICreateTeacherDTO): Promise<void> {
-        if(!isEmpty(await this.createTeacherQueryRepository.findTeacherByCpf(data.cpf))) {
-         throw new Error('CPF já Cadastrado.')
+        if (!isEmpty(await this.createTeacherQueryRepository.findTeacherByCpf(data.cpf))) {
+            throw new Error('CPF já Cadastrado.')
         }
 
         const teacher = new TeacherEntity(data)

@@ -11,7 +11,7 @@ export class UpdateTeacherQueryRepository implements IUpdateTeacherRepository {
             const [query, values] = queryHelper(student)
             await client.query(query, values)
         } catch (err) {
-            console.error('Error: ', err)
+            throw new Error('Database Error (error code: UTQR 11L)')
         } finally {
             client.release();
         }

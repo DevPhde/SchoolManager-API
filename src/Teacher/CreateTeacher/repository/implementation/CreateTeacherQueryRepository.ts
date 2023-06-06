@@ -8,7 +8,7 @@ export class CreateTeacherQueryRepository implements ICreateTeacherRepository {
         try {
             return (await client.query('SELECT * FROM teachers WHERE cpf = $1', [cpf])).rows
         } catch (err) {
-            console.error("error: ", err)
+            throw new Error('Database Error (error code: CTQR 11L)')
         } finally {
             client.release()
         }
@@ -20,7 +20,7 @@ export class CreateTeacherQueryRepository implements ICreateTeacherRepository {
         try {
             await client.query('INSERT INTO teachers (name, email, cpf) VALUES ($1, $2, $3)', [teacher.name, teacher.email, teacher.cpf]);
         } catch (err) {
-            console.error('error: ', err)
+            throw new Error('Database Error (error code: CTQR 11L)')
         } finally {
             client.release()
         }
