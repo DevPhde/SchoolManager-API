@@ -11,7 +11,12 @@ export class JobQueue {
 
   constructor() {
     this.queues = Object.values(jobs).map((job) => ({
-      bull: new Queue(job.key, "redis://127.0.0.1:6379"),
+      bull: new Queue(job.key,{
+        redis: {
+          host:'redis',
+          port: 6379,
+        },
+      }),
       name: job.key,
       handle: job.handle,
       options: job.options,
@@ -26,10 +31,13 @@ export class JobQueue {
   process() {
     this.queues.forEach((queue) => {
       queue.bull.process(queue.handle);
-
-      queue.bull.on("failed", (job, err) => {
-        console.log("Job Failed: ", queue.name, job.data);
+      queue.bull.on("failed", (job) => {
+        console.error("Job Failed: ", queue.name, job.data);
+      });
+      queue.bull.on("completed", (job,) => {
+        console.error("Job Completed: ", queue.name, job.data);
       });
     });
   }
+
 }
