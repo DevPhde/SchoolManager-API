@@ -5,7 +5,7 @@ O projeto School Manager é uma API para gerenciamento escolar. Possibilita o ca
 
 A aplicação utiliza a biblioteca Bull, responsável pelo gerenciamento de filas (queues) com suporte a prioridade e retry para determinados tipos de jobs. A persistência das filas é realizada através do Redis.
 
-Foi desenvolvida em TypeScript, seguindo padrões de projeto como SOLID (Princípios de Responsabilidade Única, Aberto/Fechado, Substituição de Liskov, Segregação de Interface e Inversão de Dependência), DDD (Domain-Driven Design) e Clean Architecture (Arquitetura Limpa). Esses padrões têm como objetivo promover a separação de preocupações, modularidade, testabilidade e escalabilidade do código.
+Foi desenvolvida em TypeScript, seguindo padrões de projeto como SOLID, DDD e Clean Architecture. Esses padrões têm como objetivo promover a separação de preocupações, modularidade, testabilidade e escalabilidade do código.
 
 O framework Express.js foi utilizado para criação das APIs e queries SQL foram empregadas para acessar os dados no banco de dados PostgreSQL.
 
@@ -25,27 +25,8 @@ Express.js, TypeScript, PostgreSQL, Redis, Bull(Queue Lib) e Docker.
 ## :rocket: Implementação futura
 * Sem planos futuros para o mesmo.
 
-<!-- ## Como Rodar o Projeto
+## Como Rodar o Projeto
 Observação: Para rodar o projeto é necessário ter o Docker instalado e configurado na máquina.
-
-Observação²: Para que a funcionalidade de envio de emails funcione corretamente, é necessário configurar as variáveis de ambiente `MAILTRAP_USER`,  `MAILTRAP_PASSWORD` e `MAILTRAP_MAIL` no arquivo `docker-compose.yml` com as credenciais da sua conta no Mailtrap. Dessa forma, você poderá visualizar os emails enviados na caixa de entrada da sua conta e testar essa funcionalidade.
-
-```
-environment:
-      NODE_ENV: development
-      JWT_SECRET: chavesecreta
-      PORT: 3002
-      MAILTRAP_HOST: sandbox.smtp.mailtrap.io
-      MAILTRAP_USER: SEU USUÁRIO
-      MAILTRAP_PASSWORD: SUA SENHA
-      MAILTRAP_MAIL: SEU EMAIL
-      REDIS_HOST: redis
-      POSTGRES_HOST: db
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: postgres
-```
-
 
 Para executar o projeto, siga os passos abaixo:
 
@@ -55,13 +36,15 @@ Para executar o projeto, siga os passos abaixo:
 ```
 docker-compose up
 ```
-Esse comando irá gerar as imagens do Redis e do PostgreSQL e inicializará o servidor na porta 3002.
+Esse comando irá gerar as imagens do Redis e do PostgreSQL e inicializará o servidor na porta 3000.
 
 Observação: É importante lembrar que a primeira execução do comando pode levar alguns minutos, pois o Docker precisa baixar as imagens necessárias para o projeto.
 
-3. Acesse o servidor através do endereço `http://localhost:3002`.
+3. Acesse o servidor através do endereço `http://localhost:3000`.
 
 Com esses passos, o projeto deverá estar rodando corretamente na sua máquina.
- -->
+
+## :books: Documentação da API
+Documentação criada utilizando Swagger e está disponível em ```localhost:3000/doc-api```.
 ## :dart: Status do projeto
 Concluído.
