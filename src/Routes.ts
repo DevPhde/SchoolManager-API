@@ -18,7 +18,7 @@ export const routes = Router()
 
 routes
     .get('/', (request, response) => { response.status(200).send('Connection OK') })
-    .post('/new/student', (request, response) => {
+    .post('/students', (request, response) => {
         return createStudentController.handle(request, response)
     })
     .get('/students', (request, response) => {
@@ -27,16 +27,16 @@ routes
     .get('/search/students', (request, response) => {
         return getFilteredStudentsController.handle(request, response)
     })
-    .delete('/student/:id', (request, response) => {
+    .delete('/students/:id', (request, response) => {
         return deleteStudentController.handle(request, response)
     })
-    .put('/student/:id', (request, response) => {
+    .put('/students/:id', (request, response) => {
         return updateStudentController.handle(request, response)
     })
-    .post('/new/teacher', (request, response) => {
+    .post('/teachers', (request, response) => {
         return createTeacherController.handle(request, response)
     })
-    .delete('/teacher/:id', (request, response) => {
+    .delete('/teachers/:id', (request, response) => {
         return deleteTeacherController.handle(request, response)
     })
     .get('/search/teachers', (request, response) => {
@@ -45,10 +45,10 @@ routes
     .get('/teachers', (request, response) => {
         return getTeachersController.handle(request, response)
     })
-    .put('/teacher/:id', (request, response) => {
+    .put('/teachers/:id', (request, response) => {
         return updateTeacherController.handle(request, response)
     })
-    .post('/new/class', (request, response) => {
+    .post('/classes', (request, response) => {
         return createClassController.handle(request, response)
     })
     .get('/classes', (request, response) => {
@@ -57,9 +57,9 @@ routes
     .get('/search/classes', (request, response) => {
         return getFilteredClassesController.handle(request, response)
     })
-    .delete('/class/:id', (request, response) => {
+    .delete('/classes/:id', (request, response) => {
         return deleteClassController.handle(request, response)
     })
-    .put('/class/:id', (request, response) => {
+    .put('/classes/:id', (request, response) => {
         return updateClassController.handle(request, response)
     })
