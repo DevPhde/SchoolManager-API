@@ -1,0 +1,627 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "SchoolManager-API",
+        "description": "API criada para gerenciamento escolar, sendo possível gerenciar alunos, professores e turmas.",
+        "contact": {
+            "email": "dbsmendes@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000",
+            "description": "local test"
+        }
+    ],
+    "paths": {
+        "/doc-api": {
+            "get": {
+                "summary": "Documentação da API",
+                "tags": [
+                    "API Doc"
+                ]
+            }
+        },
+        "/students?page=1&limit=10": {
+            "get": {
+                "summary": "Get de Alunos cadastrados(Paginado).",
+                "description": "Endpoint responsável por retornar alunos cadastrados. Utilizando a query page e limit para separar o retorno em quantidade de alunos por página.",
+                "tags": [
+                    "Student"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "page": {
+                                            "type": "number"
+                                        },
+                                        "next": {
+                                            "type": "string"
+                                        },
+                                        "previous": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unexpected Error"
+                    }
+                }
+            }
+        },
+        "/search/students?search=teste&page=1&limit=10": {
+            "get": {
+                "summary": "Get de Alunos cadastrados(utilizado em buscador)(Paginado).",
+                "description": "Endpoint responsável por retornar alunos especicífos de acordo com o parâmetro de busca. Utilizando a query page e limit para separar o retorno em quantidade de alunos por página e search para busca específica.",
+                "tags": [
+                    "Student"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "page": {
+                                            "type": "number"
+                                        },
+                                        "next": {
+                                            "type": "string"
+                                        },
+                                        "previous": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unexpected Error"
+                    }
+                }
+            }
+        },
+        "/students": {
+            "post": {
+                "summary": "Cadastro de Aluno.",
+                "description": "Endpoint responsável por cadastrar um aluno.",
+                "tags": [
+                    "Student"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Student"
+                            },
+                            "examples": {
+                                "student": {
+                                    "value": {
+                                        "name": "Lucas da Silva",
+                                        "email": "lucas_da_silva@email.com",
+                                        "cpf": "123.456.789-00"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "CPF já cadastrado."
+                    }
+                }
+            }
+        },
+        "/students/{id}": {
+            "put": {
+                "summary": "Update de Aluno.",
+                "description": "Endpoint responsável por atualizar um aluno.",
+                "tags": [
+                    "Student"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do aluno",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Student"
+                            },
+                            "examples": {
+                                "student": {
+                                    "value": {
+                                        "name": "Lucas da Silva",
+                                        "email": "lucas_da_silva@email.com"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Campos não preenchidos"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete de Aluno.",
+                "description": "Endpoint responsável por deletar um aluno.",
+                "tags": [
+                    "Student"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do aluno",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Unexpected Error"
+                    }
+                }
+            }
+        },
+        "/teachers?page=1&limit=10": {
+            "get": {
+                "summary": "Get de Professores cadastrados(Paginado).",
+                "description": "Endpoint responsável por retornar professores cadastrados. Utilizando a query page e limit para separar o retorno em quantidade de professores por página.",
+                "tags": [
+                    "Teacher"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "page": {
+                                            "type": "number"
+                                        },
+                                        "next": {
+                                            "type": "string"
+                                        },
+                                        "previous": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unexpected Error"
+                    }
+                }
+            }
+        },
+        "/search/teachers?search=teste&page=1&limit=10": {
+            "get": {
+                "summary": "Get de Professores cadastrados(utilizado em buscador)(Paginado).",
+                "description": "Endpoint responsável por retornar professores especicífos de acordo com o parâmetro de busca. Utilizando a query page e limit para separar o retorno em quantidade de professores por página e search para busca específica.",
+                "tags": [
+                    "Teacher"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "page": {
+                                            "type": "number"
+                                        },
+                                        "next": {
+                                            "type": "string"
+                                        },
+                                        "previous": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unexpected Error"
+                    }
+                }
+            }
+        },
+        "/teachers": {
+            "post": {
+                "summary": "Cadastro de Professor.",
+                "description": "Endpoint responsável por cadastrar um professor.",
+                "tags": [
+                    "Teacher"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Teacher"
+                            },
+                            "examples": {
+                                "Teacher": {
+                                    "value": {
+                                        "name": "Lucas da Silva",
+                                        "email": "lucas_da_silva@email.com",
+                                        "cpf": "123.456.789-00"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "CPF já cadastrado."
+                    }
+                }
+            }
+        },
+        "/teachers/{id}": {
+            "put": {
+                "summary": "Update de Professor.",
+                "description": "Endpoint responsável por atualizar um professor.",
+                "tags": [
+                    "Teacher"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do professor",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Teacher"
+                            },
+                            "examples": {
+                                "Teacher": {
+                                    "value": {
+                                        "name": "Lucas da Silva",
+                                        "email": "lucas_da_silva@email.com"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Campos não preenchidos"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete de Professor.",
+                "description": "Endpoint responsável por deletar um professor.",
+                "tags": [
+                    "Teacher"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do professor",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Unexpected Error"
+                    }
+                }
+            }
+        },
+        "/classes?page=1&limit=10": {
+            "get": {
+                "summary": "Get de Turmas cadastrados(Paginado).",
+                "description": "Endpoint responsável por retornar turmas cadastradas. Utilizando a query page e limit para separar o retorno em quantidade de turmas por página.",
+                "tags": [
+                    "Class"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "page": {
+                                            "type": "number"
+                                        },
+                                        "next": {
+                                            "type": "string"
+                                        },
+                                        "previous": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unexpected Error"
+                    }
+                }
+            }
+        },
+        "/search/classes?search=1001&page=1&limit=10": {
+            "get": {
+                "summary": "Get de Turmas cadastrados(utilizado em buscador)(Paginado).",
+                "description": "Endpoint responsável por retornar turmas especicífas de acordo com o parâmetro de busca. Utilizando a query page e limit para separar o retorno em quantidade de turmas por página e search para busca específica.",
+                "tags": [
+                    "Class"
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "page": {
+                                            "type": "number"
+                                        },
+                                        "next": {
+                                            "type": "string"
+                                        },
+                                        "previous": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unexpected Error"
+                    }
+                }
+            }
+        },
+        "/classes": {
+            "post": {
+                "summary": "Cadastro de Turma.",
+                "description": "Endpoint responsável por cadastrar uma turma.",
+                "tags": [
+                    "Class"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Class"
+                            },
+                            "examples": {
+                                "Class": {
+                                    "value": {
+                                        "number": 1001,
+                                        "schedule": "manhã",
+                                        "students": [
+                                            1
+                                        ],
+                                        "teacher": 1
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "turma já cadastrada."
+                    }
+                }
+            }
+        },
+        "/classes/{id}": {
+            "put": {
+                "summary": "Update de Turma.",
+                "description": "Endpoint responsável por atualizar uma turma.",
+                "tags": [
+                    "Class"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id da turma",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Class"
+                            },
+                            "examples": {
+                                "Class": {
+                                    "value": {
+                                        "schedule": "Tarde",
+                                        "students": [
+                                            2,
+                                            3,
+                                            4
+                                        ],
+                                        "teacher": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Campos não preenchidos"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete de turma.",
+                "description": "Endpoint responsável por deletar uma Turma.",
+                "tags": [
+                    "Class"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id da turma",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Unexpected Error"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Student": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Teacher": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "email": {
+                        "type": "string"
+                    },
+                    "cpf": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Class": {
+                "type": "object",
+                "properties": {
+                    "number": {
+                        "type": "number"
+                    },
+                    "schedule": {
+                        "type": "string"
+                    },
+                    "students": {
+                        "type": "array",
+                        "items": {
+                            "type": "object"
+                        }
+                    },
+                    "teacher": {
+                        "type": "number"
+                    }
+                }
+            }
+        }
+    }
+}
